@@ -103,8 +103,18 @@ using namespace OSL;
 #include <OpenEXR/ImathFun.h>
 #include <OpenImageIO/fmath.h>
 
+#if OIIO_VERSION >= 10500
+
+// DEPRECATED(1.5) - Some back-compatibility, will remove soon
+inline float safe_asinf (float x) { return OIIO::safe_asin(x); }
+inline float safe_acosf (float x) { return OIIO::safe_acos(x); }
+
+#else
+
 using OIIO::safe_asinf;
 using OIIO::safe_acosf;
+
+#endif
 
 #if defined(_MSC_VER) && _MSC_VER < 1700
 using OIIO::isinf;
